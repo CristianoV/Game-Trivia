@@ -89,7 +89,7 @@ const mapDispatchToProps = () => ({});
 
 Login.propTypes = {
   history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
+    push: PropTypes.func,
   }).isRequired,
 };
 
