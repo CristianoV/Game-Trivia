@@ -16,4 +16,18 @@ describe('Testes do componente Login', () => {
     expect(btnPlay).toBeInTheDocument();
     expect(btnSet).toBeInTheDocument();
   });
+
+
+  test('02 - Testa se o botão Play é habilitado ao digitar nos inputs', () => {
+    renderWithRouterAndRedux(<Login />)
+    const email = screen.getByLabelText(/e-mail/i);
+    const name = screen.getByLabelText(/name/i);
+    const btnPlay = screen.getByRole('button', { name: /play/i });
+    expect(btnPlay.disabled).toBe(true);
+    userEvent.type(name, 'Jeazi');
+    userEvent.type(email, 'jeazi_ricardo@hotmail.com');
+    expect(name.value).toBe('Jeazi');
+    expect(email.value).toBe('jeazi_ricardo@hotmail.com');
+    expect(btnPlay.disabled).toBe(false);
+  });
 });
