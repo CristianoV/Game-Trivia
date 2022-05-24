@@ -41,6 +41,7 @@ class Login extends React.Component {
     return (
       <form>
         <label htmlFor="name">
+          Name:
           <input
             type="text"
             data-testid="input-player-name"
@@ -51,6 +52,7 @@ class Login extends React.Component {
         </label>
 
         <label htmlFor="email">
+          E-mail:
           <input
             type="email"
             data-testid="input-gravatar-email"
@@ -61,6 +63,7 @@ class Login extends React.Component {
         </label>
 
         <button
+          name="play"
           type="button"
           data-testid="btn-play"
           disabled={ this.verifyInput() }
@@ -70,6 +73,7 @@ class Login extends React.Component {
         </button>
 
         <button
+          name="settings"
           type="button"
           data-testid="btn-settings"
           onClick={ () => history.push('/settings') }
@@ -85,7 +89,7 @@ const mapDispatchToProps = () => ({});
 
 Login.propTypes = {
   history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
+    push: PropTypes.func,
   }).isRequired,
 };
 
