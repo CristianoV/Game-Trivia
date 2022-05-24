@@ -12,6 +12,12 @@ class Login extends React.Component {
     });
   };
 
+  verifyInput = () => {
+    const { name, email } = this.state;
+    const regexEmail = /\S+@\S+\.\S+/.test(email);
+    return !(name.length && regexEmail);
+  };
+
   render() {
     const { name, email } = this.state;
 
@@ -37,7 +43,11 @@ class Login extends React.Component {
           />
         </label>
 
-        <button type="button" data-testid="btn-play">
+        <button
+          type="button"
+          data-testid="btn-play"
+          disabled={ this.verifyInput() }
+        >
           Play
         </button>
       </form>
