@@ -14,7 +14,7 @@ class Feedback extends React.Component {
 
   playAgainButton = () => {
     const { history } = this.props;
-    history.push('/');
+    history.push('/game');
   }
 
   catchGravatar = () => {
