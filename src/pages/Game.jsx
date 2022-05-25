@@ -8,6 +8,7 @@ class Game extends React.Component {
     questionIndex: 0,
     correct: null,
     shuffle: [],
+    isRunning: true,
   }
 
   componentDidMount() {
@@ -25,6 +26,7 @@ class Game extends React.Component {
     const token = localStorage.getItem('token');
     const request = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
     const json = await request.json();
+    console.log(json);
     if (json.response_code === denied) return this.tokenDenied();
     this.setState({ questions: json.results }, () => {
       this.shuffleQuestions();
@@ -49,9 +51,13 @@ class Game extends React.Component {
     this.setState({ shuffle, correct });
   }
 
+  setAnswer = () => this.setState({ isRunning: false });
+
+  verifyAnswer = (answer, correct) => (answer === correct ? 'correct' : 'incorrect');
+
   render() {
     const { hash, name, score } = this.props;
-    const { questions, questionIndex, correct, shuffle } = this.state;
+    const { questions, questionIndex, correct, shuffle, isRunning } = this.state;
     return (
       <div>
         <header>
@@ -82,9 +88,13 @@ class Game extends React.Component {
                   {
                     shuffle.map((question, i) => (
                       <button
+                        onClick={ this.setAnswer }
                         key={ i }
                         value={ question }
                         type="button"
+                        className={
+                          !isRunning && this.verifyAnswer(question, shuffle[correct])
+                        }
                         data-testid={
                           question === shuffle[correct]
                             ? 'correct-answer'
