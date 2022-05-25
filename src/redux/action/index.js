@@ -1,11 +1,16 @@
-export default actionLogin = (state) => ({
-  type: 'CHANGE_LOGIN',
-  payload: state,
+export const setHash = (payload) => ({
+  type: 'SET_HASH',
+  payload,
 });
 
-export const actionSetToken = (token) => ({
-  type: 'TOKEN',
-  payload: token,
+export const actionLogin = (payload) => ({
+  type: 'CHANGE_LOGIN',
+  payload,
+});
+
+export const actionSetToken = (payload) => ({
+  type: 'SET_TOKEN',
+  payload,
 });
 
 export const fetchToken = () => async (dispatch) => {
