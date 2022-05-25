@@ -19,7 +19,7 @@ class Feedback extends React.Component {
   }
 
   render() {
-    const { namePlayer, scorePlayer } = this.props;
+    const { namePlayer, assertionsPlayer, scorePlayer } = this.props;
     return (
       <>
         <header>
@@ -31,9 +31,11 @@ class Feedback extends React.Component {
           <p data-testid="header-player-name">{namePlayer}</p>
           <p data-testid="header-score">{scorePlayer}</p>
         </header>
-        <div>
+        <section>
           <p data-testid="feedback-text">{this.feedbackMessage()}</p>
-        </div>
+          <p data-testid="feedback-total-score">{Number(scorePlayer)}</p>
+          <p data-testid="feedback-total-question">{Number(assertionsPlayer)}</p>
+        </section>
       </>
     );
   }
@@ -43,12 +45,14 @@ const mapStateToProps = (state) => ({
   namePlayer: state.player.name,
   EmailGravatar: state.player.gravatarEmail,
   scorePlayer: state.player.score,
+  assertionsPlayer: state.player.assertions,
 });
 
 Feedback.propTypes = {
   namePlayer: PropTypes.string.isRequired,
   scorePlayer: PropTypes.number.isRequired,
   EmailGravatar: PropTypes.string.isRequired,
+  assertionsPlayer: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps)(Feedback);
