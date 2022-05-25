@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import md5 from 'crypto-js/md5';
 
 class Feedback extends React.Component {
   feedbackMessage = () => {
@@ -17,10 +16,14 @@ class Feedback extends React.Component {
     history.push('/game');
   }
 
+  rankingButton = () => {
+    const { history } = this.props;
+    history.push('/ranking');
+  }
+
   catchGravatar = () => {
-    const { EmailGravatar } = this.props;
-    const email = md5(EmailGravatar).toString();
-    return `https://www.gravatar.com/avatar/${email}`;
+    const { hashPlayer } = this.props;
+    return `https://www.gravatar.com/avatar/${hashPlayer}`;
   }
 
   render() {
@@ -45,8 +48,14 @@ class Feedback extends React.Component {
           <input
             type="button"
             value="Play Again"
-            data-testid="btn-play-again"
+            data-testid="btn-ranking"
             onClick={ () => this.playAgainButton() }
+          />
+          <input
+            type="button"
+            value="Ranking"
+            data-testid="btn-play-again"
+            onClick={ () => this.rankingButton() }
           />
         </nav>
       </>
@@ -59,14 +68,16 @@ const mapStateToProps = (state) => ({
   EmailGravatar: state.player.gravatarEmail,
   scorePlayer: state.player.score,
   assertionsPlayer: state.player.assertions,
+  hashPlayer: state.player.hash,
 });
 
 Feedback.propTypes = {
   namePlayer: PropTypes.string.isRequired,
   scorePlayer: PropTypes.number.isRequired,
-  EmailGravatar: PropTypes.string.isRequired,
   assertionsPlayer: PropTypes.number.isRequired,
   history: PropTypes.shape.isRequired,
+  hashPlayer: PropTypes.string.isRequired,
+
 };
 
 export default connect(mapStateToProps)(Feedback);
