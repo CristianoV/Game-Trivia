@@ -12,6 +12,11 @@ class Feedback extends React.Component {
     } return 'Well Done!';
   }
 
+  playAgainButton = () => {
+    const { history } = this.props;
+    history.push('/');
+  }
+
   catchGravatar = () => {
     const { EmailGravatar } = this.props;
     const email = md5(EmailGravatar).toString();
@@ -36,6 +41,14 @@ class Feedback extends React.Component {
           <p data-testid="feedback-total-score">{Number(scorePlayer)}</p>
           <p data-testid="feedback-total-question">{Number(assertionsPlayer)}</p>
         </section>
+        <nav>
+          <input
+            type="button"
+            value="Play Again"
+            data-testid="btn-play-again"
+            onClick={ () => this.playAgainButton() }
+          />
+        </nav>
       </>
     );
   }
@@ -53,6 +66,7 @@ Feedback.propTypes = {
   scorePlayer: PropTypes.number.isRequired,
   EmailGravatar: PropTypes.string.isRequired,
   assertionsPlayer: PropTypes.number.isRequired,
+  history: PropTypes.shape.isRequired,
 };
 
 export default connect(mapStateToProps)(Feedback);
