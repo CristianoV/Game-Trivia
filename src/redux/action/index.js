@@ -13,6 +13,11 @@ export const actionSetToken = (payload) => ({
   payload,
 });
 
+export const actionSumScore = (payload) => ({
+  type: 'SUM_SCORE',
+  payload,
+});
+
 export const fetchToken = () => async (dispatch) => {
   const request = await fetch(
     'https://opentdb.com/api_token.php?command=request',
