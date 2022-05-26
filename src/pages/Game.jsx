@@ -18,7 +18,6 @@ class Game extends React.Component {
   }
 
   componentDidUpdate(_null, prevState) {
-    console.log(prevState.time);
     if (prevState.time === 1) {
       clearInterval(this.interval);
     }
@@ -35,7 +34,6 @@ class Game extends React.Component {
     const token = localStorage.getItem('token');
     const request = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
     const json = await request.json();
-    console.log(json);
     if (json.response_code === denied) return this.tokenDenied();
     this.setState({ questions: json.results }, () => {
       this.shuffleQuestions();
