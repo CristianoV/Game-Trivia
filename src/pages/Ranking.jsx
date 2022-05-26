@@ -20,7 +20,7 @@ class Ranking extends React.Component {
           Login
         </button>
         <div>
-          <ul>
+          {/* <ul>
             { RankingToLocalStorage.length !== 0 ? (
               RankingToLocalStorage.map((player, index) => (
                 <li key={ index }>
@@ -28,7 +28,7 @@ class Ranking extends React.Component {
                   <div data-testid={ `player-score-${index}` }>{player.score}</div>
                 </li>))
             ) : null }
-          </ul>
+          </ul> */}
         </div>
       </main>
     );

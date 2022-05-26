@@ -82,6 +82,7 @@ describe('Testes da pagina de Feedback', () => {
         name: /ranking/i
       })
       expect(buttonRanking).toBeInTheDocument();
+      userEvent.click(buttonRanking);
       const { pathname } = history.location;
       expect(pathname).toBe('/ranking');
     });
