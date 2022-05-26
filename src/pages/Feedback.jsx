@@ -7,9 +7,9 @@ class Feedback extends React.Component {
   feedbackMessage = () => {
     const { scorePlayer } = this.props;
     const NUMBER_MIN_WELL_DONE = 3;
-    if (scorePlayer <= NUMBER_MIN_WELL_DONE) {
-      return 'Could be better...';
-    } return 'Well Done!';
+    if (scorePlayer >= NUMBER_MIN_WELL_DONE) {
+      return 'Well Done!';
+    } return 'Could be better...';
   }
 
   playAgainButton = () => {
