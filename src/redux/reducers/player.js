@@ -13,6 +13,8 @@ const player = (state = INITIAL_STATE, action) => {
     return { ...state, ...action.payload };
   case 'SET_HASH':
     return { ...state, hash: action.payload };
+  case 'SUM_SCORE':
+    return { ...state, score: state.score + action.payload };
   default:
     return state;
   }

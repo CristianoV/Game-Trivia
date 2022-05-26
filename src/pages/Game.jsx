@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
+import { actionSumScore } from '../redux/action';
 
 class Game extends React.Component {
   state = {
@@ -64,9 +65,33 @@ class Game extends React.Component {
     this.setState({ shuffle, correct });
   };
 
+  verifyDifficulty = () => {
+    const { questions, questionIndex } = this.state;
+    const currentQuestion = questions[questionIndex];
+    const HARD = 3;
+    if (currentQuestion.difficulty === 'easy') {
+      return 1;
+    }
+    if (currentQuestion.difficulty === 'medium') {
+      return 2;
+    }
+    if (currentQuestion.difficulty === 'hard') {
+      return HARD;
+    }
+  };
+
   setAnswer = ({ target }) => {
     clearInterval(this.interval);
-    this.setState({ isRunning: false }, () => console.log(target.className));
+    const { sumScore } = this.props;
+    this.setState({ isRunning: false }, () => {
+      if (target.className === 'correct') {
+        const { time } = this.state;
+        const valueDificulty = this.verifyDifficulty();
+        const correct = 10;
+        const value = correct + valueDificulty * time;
+        sumScore(value);
+      }
+    });
   };
 
   verifyAnswer = (answer, correct) => (answer === correct ? 'correct' : 'incorrect');
@@ -148,11 +173,16 @@ const mapStateToProps = (state) => ({
   score: state.player.score,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  sumScore: (score) => dispatch(actionSumScore(score)),
+});
+
 Game.propTypes = {
   name: propTypes.string.isRequired,
   hash: propTypes.string.isRequired,
   score: propTypes.number.isRequired,
+  sumScore: propTypes.func.isRequired,
   history: propTypes.shape({ push: propTypes.func }).isRequired,
 };
 
-export default connect(mapStateToProps, null)(Game);
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
