@@ -112,6 +112,20 @@ class Game extends React.Component {
     }
   };
 
+  buttonNext = () => {
+    this.setState(
+      ({ questionIndex }) => ({
+        questionIndex: questionIndex + 1,
+        isRunning: true,
+        time: 30,
+      }),
+      () => {
+        this.timer();
+        this.shuffleQuestions();
+      },
+    );
+  };
+
   render() {
     const { hash, name, score } = this.props;
     const { questions, questionIndex, correct, shuffle, isRunning, time } = this.state;
@@ -159,6 +173,15 @@ class Game extends React.Component {
                   </button>
                 ))}
               </div>
+              {!isRunning && (
+                <button
+                  type="button"
+                  data-testid="btn-next"
+                  onClick={ this.buttonNext }
+                >
+                  Next
+                </button>
+              )}
             </div>
           )}
         </main>
