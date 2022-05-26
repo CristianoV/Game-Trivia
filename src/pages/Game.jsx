@@ -9,10 +9,19 @@ class Game extends React.Component {
     correct: null,
     shuffle: [],
     isRunning: true,
+    time: 30,
   }
 
   componentDidMount() {
     this.getQuestions();
+    this.timer();
+  }
+
+  componentDidUpdate(_null, prevState) {
+    console.log(prevState.time);
+    if (prevState.time === 1) {
+      clearInterval(this.interval);
+    }
   }
 
   tokenDenied = () => {
@@ -55,9 +64,25 @@ class Game extends React.Component {
 
   verifyAnswer = (answer, correct) => (answer === correct ? 'correct' : 'incorrect');
 
+  addTimer = () => {
+    this.setState((prevState) => ({
+      time: prevState.time - 1,
+    }));
+  };
+
+  timer = () => {
+    const MAX_TIME = 0;
+    const TIMEOUT = 1000;
+    const { time } = this.state;
+    if (time > MAX_TIME) {
+      this.interval = setInterval(() => this.addTimer(), TIMEOUT);
+      return time;
+    }
+  };
+
   render() {
     const { hash, name, score } = this.props;
-    const { questions, questionIndex, correct, shuffle, isRunning } = this.state;
+    const { questions, questionIndex, correct, shuffle, isRunning, time } = this.state;
     return (
       <div>
         <header>
@@ -70,6 +95,7 @@ class Game extends React.Component {
           />
         </header>
         <main>
+          <span>{ time }</span>
           {
             questions.length && (
               <div>
@@ -88,6 +114,7 @@ class Game extends React.Component {
                   {
                     shuffle.map((question, i) => (
                       <button
+                        disabled={ time <= 0 }
                         onClick={ this.setAnswer }
                         key={ i }
                         value={ question }
