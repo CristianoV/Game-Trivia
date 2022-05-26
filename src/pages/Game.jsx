@@ -113,9 +113,15 @@ class Game extends React.Component {
   };
 
   buttonNext = () => {
+    const { questions, questionIndex } = this.state;
+    const QUESTIONS_LENGTH = questions.length;
+    if (questionIndex === QUESTIONS_LENGTH - 1) {
+      const { history } = this.props;
+      history.push('/feedback');
+    }
     this.setState(
-      ({ questionIndex }) => ({
-        questionIndex: questionIndex + 1,
+      (prevState) => ({
+        questionIndex: prevState.questionIndex + 1,
         isRunning: true,
         time: 30,
       }),
