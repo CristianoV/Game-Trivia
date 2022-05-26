@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import md5 from 'crypto-js/md5';
+import { actionLogin, setHash } from '../redux/action';
 
 class Login extends React.Component {
   state = {
@@ -28,7 +30,10 @@ class Login extends React.Component {
     return json.token;
   };
 
-  handleClick = async () => {
+  handleClick = async (info) => {
+    const { setEmail, setHashAction } = this.props;
+    setEmail(info);
+    setHashAction(md5(info.gravatarEmail).toString());
     const token = await this.fetchToken();
     localStorage.setItem('token', token);
     const { history } = this.props;
@@ -67,7 +72,7 @@ class Login extends React.Component {
           type="button"
           data-testid="btn-play"
           disabled={ this.verifyInput() }
-          onClick={ this.handleClick }
+          onClick={ () => this.handleClick({ name, gravatarEmail: email }) }
         >
           Play
         </button>
@@ -85,9 +90,14 @@ class Login extends React.Component {
   }
 }
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = (dispatch) => ({
+  setEmail: (email) => dispatch(actionLogin(email)),
+  setHashAction: (hash) => dispatch(setHash(hash)),
+});
 
 Login.propTypes = {
+  setEmail: PropTypes.func.isRequired,
+  setHashAction: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
