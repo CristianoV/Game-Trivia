@@ -1,6 +1,5 @@
 const INITIAL_STATE = {
   name: '',
-  assertion: '',
   score: 0,
   hash: '',
   gravatarEmail: '',
