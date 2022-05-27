@@ -11,16 +11,20 @@ class Ranking extends React.Component {
     const RankingToLocalStorage = localStorage.getItem('ranking');
     console.log(RankingToLocalStorage);
     return (
-      <main>
-        <button
-          type="button"
-          data-testid="btn-go-home"
-          onClick={ this.backToLogin }
-        >
-          Login
-        </button>
-        <div>
-          {/* <ul>
+      <>
+        <header data-testid="ranking-title">
+          Tela de Ranking
+        </header>
+        <main>
+          <button
+            type="button"
+            data-testid="btn-go-home"
+            onClick={ this.backToLogin }
+          >
+            Login
+          </button>
+          <div>
+            {/* <ul>
             { RankingToLocalStorage.length !== 0 ? (
               RankingToLocalStorage.map((player, index) => (
                 <li key={ index }>
@@ -29,8 +33,9 @@ class Ranking extends React.Component {
                 </li>))
             ) : null }
           </ul> */}
-        </div>
-      </main>
+          </div>
+        </main>
+      </>
     );
   }
 }
