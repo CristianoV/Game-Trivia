@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
-import { actionSumScore } from '../redux/action';
+import { actionSumAcertion, actionSumScore } from '../redux/action';
 
 class Game extends React.Component {
   state = {
@@ -82,7 +82,7 @@ class Game extends React.Component {
 
   setAnswer = ({ target }) => {
     clearInterval(this.interval);
-    const { sumScore } = this.props;
+    const { sumScore, sumAcertion } = this.props;
     this.setState({ isRunning: false }, () => {
       if (target.className === 'correct') {
         const { time } = this.state;
@@ -90,6 +90,7 @@ class Game extends React.Component {
         const correct = 10;
         const value = correct + valueDificulty * time;
         sumScore(value);
+        sumAcertion();
       }
     });
   };
@@ -204,6 +205,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   sumScore: (score) => dispatch(actionSumScore(score)),
+  sumAcertion: () => dispatch(actionSumAcertion()),
 });
 
 Game.propTypes = {
@@ -211,6 +213,7 @@ Game.propTypes = {
   hash: propTypes.string.isRequired,
   score: propTypes.number.isRequired,
   sumScore: propTypes.func.isRequired,
+  sumAcertion: propTypes.func.isRequired,
   history: propTypes.shape({ push: propTypes.func }).isRequired,
 };
 
