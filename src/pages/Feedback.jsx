@@ -1,8 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { actionResetPlayer } from '../redux/action';
 
 class Feedback extends React.Component {
+  componentWillUnmount() {
+    const { reset } = this.props;
+    reset();
+  }
+
   feedbackMessage = () => {
     const { assertionsPlayer } = this.props;
     const NUMBER_MIN_WELL_DONE = 3;
@@ -71,13 +77,18 @@ const mapStateToProps = (state) => ({
   hashPlayer: state.player.hash,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  reset: () => dispatch(actionResetPlayer()),
+});
+
 Feedback.propTypes = {
   namePlayer: PropTypes.string.isRequired,
   scorePlayer: PropTypes.number.isRequired,
   assertionsPlayer: PropTypes.number.isRequired,
   history: PropTypes.shape.isRequired,
   hashPlayer: PropTypes.string.isRequired,
+  reset: PropTypes.func.isRequired,
 
 };
 
-export default connect(mapStateToProps)(Feedback);
+export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
