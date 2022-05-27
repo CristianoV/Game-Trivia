@@ -15,6 +15,8 @@ const player = (state = INITIAL_STATE, action) => {
     return { ...state, hash: action.payload };
   case 'SUM_SCORE':
     return { ...state, score: state.score + action.payload };
+  case 'SUM_ACERTION':
+    return { ...state, assertions: state.assertions + action.payload };
   default:
     return state;
   }

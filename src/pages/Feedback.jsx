@@ -4,16 +4,16 @@ import PropTypes from 'prop-types';
 
 class Feedback extends React.Component {
   feedbackMessage = () => {
-    const { scorePlayer } = this.props;
+    const { assertionsPlayer } = this.props;
     const NUMBER_MIN_WELL_DONE = 3;
-    if (scorePlayer >= NUMBER_MIN_WELL_DONE) {
+    if (assertionsPlayer >= NUMBER_MIN_WELL_DONE) {
       return 'Well Done!';
     } return 'Could be better...';
   }
 
   playAgainButton = () => {
     const { history } = this.props;
-    history.push('/game');
+    history.push('/');
   }
 
   rankingButton = () => {
@@ -48,13 +48,13 @@ class Feedback extends React.Component {
           <input
             type="button"
             value="Play Again"
-            data-testid="btn-ranking"
+            data-testid="btn-play-again"
             onClick={ () => this.playAgainButton() }
           />
           <input
             type="button"
             value="Ranking"
-            data-testid="btn-play-again"
+            data-testid="btn-ranking"
             onClick={ () => this.rankingButton() }
           />
         </nav>
