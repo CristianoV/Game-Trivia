@@ -2,14 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Ranking extends React.Component {
+  state = {
+    ranking: [],
+  }
+
+  componentDidMount() {
+    const RankingToLocalStorage = JSON.parse(localStorage.getItem('ranking'));
+    this.setState({ ranking: RankingToLocalStorage.sort((a, b) => b.score - a.score) });
+  }
+
   backToLogin = () => {
     const { history } = this.props;
     history.push('/');
   }
 
   render() {
-    const RankingToLocalStorage = localStorage.getItem('ranking');
-    console.log(RankingToLocalStorage);
+    const { ranking } = this.state;
     return (
       <>
         <header data-testid="ranking-title">
@@ -24,15 +32,15 @@ class Ranking extends React.Component {
             Login
           </button>
           <div>
-            {/* <ul>
-            { RankingToLocalStorage.length !== 0 ? (
-              RankingToLocalStorage.map((player, index) => (
-                <li key={ index }>
-                  <div data-testid={ `player-name-${index}` }>{player.name}</div>
-                  <div data-testid={ `player-score-${index}` }>{player.score}</div>
-                </li>))
-            ) : null }
-          </ul> */}
+            <ul>
+              { ranking.length !== 0 ? (
+                ranking.map((player, index) => (
+                  <li key={ index }>
+                    <div data-testid={ `player-name-${index}` }>{player.name}</div>
+                    <div data-testid={ `player-score-${index}` }>{player.score}</div>
+                  </li>))
+              ) : null }
+            </ul>
           </div>
         </main>
       </>

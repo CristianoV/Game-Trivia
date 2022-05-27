@@ -24,6 +24,21 @@ class Game extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    const { name, hash, score } = this.props;
+    const picture = `https://www.gravatar.com/avatar/${hash}`;
+    const localStorageAtual = JSON.parse(localStorage.getItem('ranking'));
+    if (!localStorageAtual) {
+      localStorage.setItem('ranking', JSON.stringify([{ name, picture, score }]));
+    }
+    if (localStorageAtual) {
+      localStorage
+        .setItem(
+          'ranking', JSON.stringify([...localStorageAtual, { name, picture, score }]),
+        );
+    }
+  }
+
   tokenDenied = () => {
     const {
       history: { push },
