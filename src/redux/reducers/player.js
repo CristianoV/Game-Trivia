@@ -17,6 +17,8 @@ const player = (state = INITIAL_STATE, action) => {
     return { ...state, score: state.score + action.payload };
   case 'SUM_ACERTION':
     return { ...state, assertions: state.assertions + action.payload };
+  case 'RESET_PLAYER':
+    return { ...state, ...INITIAL_STATE };
   default:
     return state;
   }

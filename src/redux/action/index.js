@@ -23,6 +23,10 @@ export const actionSumAcertion = () => ({
   payload: 1,
 });
 
+export const actionResetPlayer = () => ({
+  type: 'RESET_PLAYER',
+});
+
 export const fetchToken = () => async (dispatch) => {
   const request = await fetch(
     'https://opentdb.com/api_token.php?command=request',
