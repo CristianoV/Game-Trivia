@@ -195,7 +195,7 @@ class Game extends React.Component {
                   </button>
                 ))}
               </div>
-              {!isRunning && (
+              {(!isRunning || time === 0) && (
                 <button
                   type="button"
                   data-testid="btn-next"
