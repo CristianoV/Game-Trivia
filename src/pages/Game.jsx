@@ -154,7 +154,6 @@ class Game extends React.Component {
     const { questions, questionIndex, correct, shuffle, isRunning, time } = this.state;
     return (
       <div>
-        {/* { console.log(questions, 'ué ta funcionando')} */}
         <header>
           <p data-testid="header-player-name">{name}</p>
           <p data-testid="header-score">{score}</p>
