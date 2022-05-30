@@ -8,7 +8,7 @@ import userEvent from '@testing-library/user-event';
 describe('Testes do componente Login', () => {
   test('01 - Testa se os elementos estão na tela', () => {
     renderWithRouterAndRedux(<Login />)
-    const email = screen.getByLabelText(/e-mail/i);
+    const email = screen.getByLabelText(/email/i);
     const name = screen.getByLabelText(/name/i);
     const btnPlay = screen.getByRole('button', { name: /play/i });
     const btnSet = screen.getByRole('button', { name: /settings/i });
@@ -21,7 +21,7 @@ describe('Testes do componente Login', () => {
 
   test('02 - Testa se o botão Play é habilitado ao digitar nos inputs', () => {
     renderWithRouterAndRedux(<Login />)
-    const email = screen.getByLabelText(/e-mail/i);
+    const email = screen.getByLabelText(/email/i);
     const name = screen.getByLabelText(/name/i);
     const btnPlay = screen.getByRole('button', { name: /play/i });
     expect(btnPlay.disabled).toBe(true);
@@ -34,9 +34,10 @@ describe('Testes do componente Login', () => {
 
   test('03 - Testa se ao clicar no botão Play a página é redirecionada', async () => {
     const { history } = renderWithRouterAndRedux(<App />);
-    const email = screen.getByLabelText(/e-mail/i);
+    const email = screen.getByLabelText(/email/i);
     const name = screen.getByLabelText(/name/i);
     const btnPlay = screen.getByRole('button', { name: /play/i });
+    expect(btnPlay).toBeInTheDocument();
     userEvent.type(name, 'Jeazi');
     userEvent.type(email, 'jeazi_ricardo@hotmail.com');
     userEvent.click(btnPlay);

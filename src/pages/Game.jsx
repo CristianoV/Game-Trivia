@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import { actionSumAcertion, actionSumScore } from '../redux/action';
+import '../styles/Game.css';
+import image from '../trivia.png';
 
 class Game extends React.Component {
   state = {
@@ -29,13 +31,16 @@ class Game extends React.Component {
     const picture = `https://www.gravatar.com/avatar/${hash}`;
     const localStorageAtual = JSON.parse(localStorage.getItem('ranking'));
     if (!localStorageAtual) {
-      localStorage.setItem('ranking', JSON.stringify([{ name, picture, score }]));
+      localStorage.setItem(
+        'ranking',
+        JSON.stringify([{ name, picture, score }]),
+      );
     }
     if (localStorageAtual) {
-      localStorage
-        .setItem(
-          'ranking', JSON.stringify([...localStorageAtual, { name, picture, score }]),
-        );
+      localStorage.setItem(
+        'ranking',
+        JSON.stringify([...localStorageAtual, { name, picture, score }]),
+      );
     }
   }
 
@@ -157,28 +162,35 @@ class Game extends React.Component {
     const { hash, name, score } = this.props;
     const { questions, questionIndex, correct, shuffle, isRunning, time } = this.state;
     return (
-      <div>
-        <header>
-          <p data-testid="header-player-name">{name}</p>
-          <p data-testid="header-score">{score}</p>
-          <img
-            src={ `https://www.gravatar.com/avatar/${hash}` }
-            alt="profileimage"
-            data-testid="header-profile-picture"
-          />
+      <div className="container-player-info">
+        <header className="header">
+          <div className="logo-trivia">
+            <img src={ image } alt="logo-game" />
+          </div>
+          <div className="info-game">
+            <span data-testid="timer">{time}</span>
+            <p data-testid="header-score">{score}</p>
+          </div>
+          <div className="info-player">
+            <p data-testid="header-player-name">{name}</p>
+            <img
+              src={ `https://www.gravatar.com/avatar/${hash}` }
+              alt="profileimage"
+              data-testid="header-profile-picture"
+            />
+          </div>
         </header>
-        <main>
-          <span data-testid="timer">{time}</span>
+        <main className="container-game">
           {questions.length && (
             <div>
+              <p data-testid="question-text">
+                {questions[questionIndex].question}
+              </p>
               <p data-testid="question-category">
                 {questions[questionIndex].category}
               </p>
               <p>{questions[questionIndex].difficulty}</p>
-              <p data-testid="question-text">
-                {questions[questionIndex].question}
-              </p>
-              <div data-testid="answer-options">
+              <div data-testid="answer-options" className="answer">
                 {shuffle.map((question, i) => (
                   <button
                     disabled={ time <= 0 || !isRunning }
@@ -188,7 +200,8 @@ class Game extends React.Component {
                     type="button"
                     className={
                       !isRunning
-                        ? this.verifyAnswer(question, shuffle[correct]) : ''
+                        ? this.verifyAnswer(question, shuffle[correct])
+                        : ''
                     }
                     data-testid={
                       question === shuffle[correct]
@@ -200,15 +213,18 @@ class Game extends React.Component {
                   </button>
                 ))}
               </div>
-              {(!isRunning || time === 0) && (
-                <button
-                  type="button"
-                  data-testid="btn-next"
-                  onClick={ this.buttonNext }
-                >
-                  Next
-                </button>
-              )}
+              <div className="containerBtnNext">
+                {(!isRunning || time === 0) && (
+                  <button
+                    type="button"
+                    data-testid="btn-next"
+                    onClick={ this.buttonNext }
+                    className="buttonNext"
+                  >
+                    Next
+                  </button>
+                )}
+              </div>
             </div>
           )}
         </main>

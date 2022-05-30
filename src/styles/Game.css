@@ -1,0 +1,69 @@
+body {
+  background: rgb(15, 0, 47);
+  background-image: linear-gradient(180deg, rgba(15, 0, 47, 1) 0%, rgba(37, 0, 112, 1) 100%);
+  color: white;
+}
+
+.container-game {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 25px;
+  height: 78vh;
+  justify-content: center;
+  margin: 0 auto;
+  width: 50vw;
+}
+
+.logo-trivia img {
+  width: 150px;
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 30px;
+}
+
+.info-player {
+  align-items: center;
+  display: flex;
+  font-size: 20px;
+}
+
+.info-player img {
+  border-radius: 50%;
+  margin-left: 8px;
+}
+
+.info-game {
+  font-size: 30px;
+}
+
+.answer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20px;
+  margin-top: 15px;
+}
+
+.answer button {
+  padding: 10px;
+}
+
+main {
+  margin-top: 100px;
+}
+
+.buttonNext {
+  padding: 6px;
+  width: 50%;
+}
+
+.containerBtnNext {
+  align-items: center;
+  display: flex;
+  flex-direction: column-reverse;
+}
