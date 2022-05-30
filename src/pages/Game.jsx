@@ -54,6 +54,7 @@ class Game extends React.Component {
       `https://opentdb.com/api.php?amount=5&token=${token}`,
     );
     const json = await request.json();
+    // console.log(json);
     if (json.response_code === denied) return this.tokenDenied();
     this.setState({ questions: json.results }, () => {
       this.shuffleQuestions();
@@ -84,13 +85,14 @@ class Game extends React.Component {
     const { questions, questionIndex } = this.state;
     const currentQuestion = questions[questionIndex];
     const HARD = 3;
-    if (currentQuestion.difficulty === 'easy') {
-      return 1;
-    }
-    if (currentQuestion.difficulty === 'medium') {
-      return 2;
-    }
-    if (currentQuestion.difficulty === 'hard') {
+    const MEDIUM = 2;
+    const EASY = 1;
+    switch (currentQuestion.difficulty) {
+    case 'easy':
+      return EASY;
+    case 'medium':
+      return MEDIUM;
+    default:
       return HARD;
     }
   };
@@ -106,6 +108,9 @@ class Game extends React.Component {
         const value = correct + valueDificulty * time;
         sumScore(value);
         sumAcertion();
+      } else {
+        const value = 0;
+        sumScore(value);
       }
     });
   };
@@ -163,7 +168,7 @@ class Game extends React.Component {
           />
         </header>
         <main>
-          <span>{time}</span>
+          <span data-testid="timer">{time}</span>
           {questions.length && (
             <div>
               <p data-testid="question-category">
@@ -183,7 +188,7 @@ class Game extends React.Component {
                     type="button"
                     className={
                       !isRunning
-                      && this.verifyAnswer(question, shuffle[correct])
+                        ? this.verifyAnswer(question, shuffle[correct]) : ''
                     }
                     data-testid={
                       question === shuffle[correct]
