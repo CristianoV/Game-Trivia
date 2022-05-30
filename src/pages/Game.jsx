@@ -185,7 +185,7 @@ class Game extends React.Component {
                     type="button"
                     className={
                       !isRunning
-                      && this.verifyAnswer(question, shuffle[correct])
+                        ? this.verifyAnswer(question, shuffle[correct]) : ''
                     }
                     data-testid={
                       question === shuffle[correct]

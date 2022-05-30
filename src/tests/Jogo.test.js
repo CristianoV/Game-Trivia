@@ -55,10 +55,13 @@ describe('Testes da pagina de Jogo', () => {
       json: jest.fn().mockResolvedValue(questionsResponse),
     });
 
-    const { debug } = renderWithRouterAndRedux(<App />, initialState, '/game');
+    jest.useFakeTimers();
 
+    const { debug } = renderWithRouterAndRedux(<App />, initialState, '/game');
+    
     await waitFor(() => {
       questionsResponse.results.map(asd => {
+        jest.advanceTimersByTime(5000)
       const question = screen.getByTestId('question-text');
       expect(question).toBeInTheDocument();
       const timeGame = screen.getByTestId('timer');
@@ -72,6 +75,7 @@ describe('Testes da pagina de Jogo', () => {
       const buttonNext = screen.getByTestId("btn-next");
       expect(buttonNext).toBeInTheDocument();
       userEvent.click(buttonNext);
+      
       } )
       // userEvent.click(correctAnswer)
       // userEvent.click(buttonNext);
@@ -111,4 +115,39 @@ describe('Testes da pagina de Jogo', () => {
     });
     // debug();
   });
+
+  test('04 - Teste de timers', async () => {
+    const initialState = {
+      player: {
+        name: 'TestRanking',
+        gravatarEmail: 'cristiano@Trybe.com',
+        score: 0,
+        assertions: 0,
+        hash: '123123',
+      },
+    };
+  
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(questionsResponse),
+    });
+
+    jest.useFakeTimers();
+  
+    const { debug } = renderWithRouterAndRedux(<App />, initialState, '/game');
+    
+  
+    await waitFor(() => {
+      questionsResponse.results.map(asd => {
+      jest.advanceTimersByTime(40000)
+      const correctAnswer = screen.getByTestId('correct-answer');
+      expect(correctAnswer).toBeInTheDocument();
+      // userEvent.click(correctAnswer)
+      const buttonNext = screen.getByTestId("btn-next");
+      expect(buttonNext).toBeInTheDocument();
+      userEvent.click(buttonNext);
+      })
+    });
+  });
 });
+
