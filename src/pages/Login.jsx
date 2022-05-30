@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
 import { actionLogin, setHash } from '../redux/action';
+import '../styles/Login.css';
+import image from '../trivia.png';
 
 class Login extends React.Component {
   state = {
@@ -44,48 +46,55 @@ class Login extends React.Component {
     const { name, email } = this.state;
     const { history } = this.props;
     return (
-      <form>
-        <label htmlFor="name">
-          Name:
-          <input
-            type="text"
-            data-testid="input-player-name"
-            id="name"
-            value={ name }
-            onChange={ this.handleChange }
-          />
-        </label>
+      <div className="container-login">
+        <img src={ image } alt="logo-game" />
+        <form>
+          <div className="name-player">
+            <label htmlFor="name">
+              NAME:
+              <input
+                type="text"
+                data-testid="input-player-name"
+                id="name"
+                value={ name }
+                onChange={ this.handleChange }
+              />
+            </label>
+          </div>
 
-        <label htmlFor="email">
-          E-mail:
-          <input
-            type="email"
-            data-testid="input-gravatar-email"
-            id="email"
-            value={ email }
-            onChange={ this.handleChange }
-          />
-        </label>
+          <div className="email-player">
+            <label htmlFor="email">
+              EMAIL:
+              <input
+                type="email"
+                data-testid="input-gravatar-email"
+                id="email"
+                value={ email }
+                onChange={ this.handleChange }
+              />
+            </label>
+          </div>
 
-        <button
-          name="play"
-          type="button"
-          data-testid="btn-play"
-          disabled={ this.verifyInput() }
-          onClick={ () => this.handleClick({ name, gravatarEmail: email }) }
-        >
-          Play
-        </button>
+          <button
+            name="play"
+            type="button"
+            data-testid="btn-play"
+            disabled={ this.verifyInput() }
+            onClick={ () => this.handleClick({ name, gravatarEmail: email }) }
+          >
+            Play
+          </button>
 
-        <button
-          name="settings"
-          type="button"
-          data-testid="btn-settings"
-          onClick={ () => history.push('/settings') }
-        >
-          Settings
-        </button>
-      </form>
+          <button
+            name="settings"
+            type="button"
+            data-testid="btn-settings"
+            onClick={ () => history.push('/settings') }
+          >
+            Settings
+          </button>
+        </form>
+      </div>
     );
   }
 }
