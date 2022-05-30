@@ -85,13 +85,14 @@ class Game extends React.Component {
     const { questions, questionIndex } = this.state;
     const currentQuestion = questions[questionIndex];
     const HARD = 3;
-    if (currentQuestion.difficulty === 'easy') {
-      return 1;
-    }
-    if (currentQuestion.difficulty === 'medium') {
-      return 2;
-    }
-    if (currentQuestion.difficulty === 'hard') {
+    const MEDIUM = 2;
+    const EASY = 1;
+    switch (currentQuestion.difficulty) {
+    case 'easy':
+      return EASY;
+    case 'medium':
+      return MEDIUM;
+    default:
       return HARD;
     }
   };
@@ -107,6 +108,9 @@ class Game extends React.Component {
         const value = correct + valueDificulty * time;
         sumScore(value);
         sumAcertion();
+      } else {
+        const value = 0;
+        sumScore(value);
       }
     });
   };
