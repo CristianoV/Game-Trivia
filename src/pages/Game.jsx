@@ -54,6 +54,7 @@ class Game extends React.Component {
       `https://opentdb.com/api.php?amount=5&token=${token}`,
     );
     const json = await request.json();
+    // console.log(json);
     if (json.response_code === denied) return this.tokenDenied();
     this.setState({ questions: json.results }, () => {
       this.shuffleQuestions();
@@ -153,6 +154,7 @@ class Game extends React.Component {
     const { questions, questionIndex, correct, shuffle, isRunning, time } = this.state;
     return (
       <div>
+        {/* { console.log(questions, 'ué ta funcionando')} */}
         <header>
           <p data-testid="header-player-name">{name}</p>
           <p data-testid="header-score">{score}</p>
@@ -163,7 +165,7 @@ class Game extends React.Component {
           />
         </header>
         <main>
-          <span>{time}</span>
+          <span data-testid="timer">{time}</span>
           {questions.length && (
             <div>
               <p data-testid="question-category">
