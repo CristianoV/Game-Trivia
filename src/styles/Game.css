@@ -1,6 +1,5 @@
 body {
-  background: rgb(15, 0, 47);
-  background-image: linear-gradient(180deg, rgba(15, 0, 47, 1) 0%, rgba(37, 0, 112, 1) 100%);
+  background: linear-gradient(180deg, rgba(15, 0, 47, 1) 0%, rgba(37, 0, 112, 1) 100%);
   color: white;
 }
 
@@ -9,9 +8,10 @@ body {
   display: flex;
   flex-direction: column;
   font-size: 25px;
-  height: 78vh;
-  justify-content: center;
+  height: 85vh;
+  justify-content: flex-start;
   margin: 0 auto;
+  overflow-y: hidden;
   width: 50vw;
 }
 
@@ -24,6 +24,7 @@ body {
   display: flex;
   justify-content: space-between;
   margin: 0 30px;
+  padding: 10px 0 0;
 }
 
 .info-player {
@@ -35,9 +36,12 @@ body {
 .info-player img {
   border-radius: 50%;
   margin-left: 8px;
+  width: 40px;
 }
 
 .info-game {
+  align-items: center;
+  display: flex;
   font-size: 30px;
 }
 
@@ -53,10 +57,6 @@ body {
   padding: 10px;
 }
 
-main {
-  margin-top: 100px;
-}
-
 .buttonNext {
   padding: 6px;
   width: 50%;
@@ -66,4 +66,12 @@ main {
   align-items: center;
   display: flex;
   flex-direction: column-reverse;
+}
+
+.game p:nth-child( 1 ) {
+  font-weight: 700;
+}
+
+.game p:nth-child( 2 ), .game p:nth-child( 3 ) {
+  font-size: 20px;
 }

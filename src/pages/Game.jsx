@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
+import he from 'he';
 import { actionSumAcertion, actionSumScore } from '../redux/action';
 import '../styles/Game.css';
 import image from '../trivia.png';
@@ -46,9 +47,7 @@ class Game extends React.Component {
   }
 
   tokenDenied = () => {
-    const {
-      history: { push },
-    } = this.props;
+    const { history: { push } } = this.props;
     localStorage.removeItem('token');
     push('/');
   };
@@ -60,11 +59,8 @@ class Game extends React.Component {
       `https://opentdb.com/api.php?amount=5&token=${token}`,
     );
     const json = await request.json();
-    // console.log(json);
     if (json.response_code === denied) return this.tokenDenied();
-    this.setState({ questions: json.results }, () => {
-      this.shuffleQuestions();
-    });
+    this.setState({ questions: json.results }, () => this.shuffleQuestions());
   };
 
   shuffleArray = (array) => {
@@ -165,13 +161,10 @@ class Game extends React.Component {
     return (
       <div className="container-player-info">
         <header className="header">
-          <div className="logo-trivia">
-            <img src={ image } alt="logo-game" />
-          </div>
+          <div className="logo-trivia"><img src={ image } alt="logo-game" /></div>
           <div className="info-game">
-            {/* <span data-testid="timer">{time}</span> */}
             <Timer time={ time } />
-            <p data-testid="header-score">{score}</p>
+            <p data-testid="header-score">{`Pontos: ${score}`}</p>
           </div>
           <div className="info-player">
             <p data-testid="header-player-name">{name}</p>
@@ -184,13 +177,11 @@ class Game extends React.Component {
         </header>
         <main className="container-game">
           {questions.length && (
-            <div>
+            <div className="game">
               <p data-testid="question-text">
-                {questions[questionIndex].question}
+                {he.decode(questions[questionIndex].question)}
               </p>
-              <p data-testid="question-category">
-                {questions[questionIndex].category}
-              </p>
+              <p data-testid="question-category">{questions[questionIndex].category}</p>
               <p>{questions[questionIndex].difficulty}</p>
               <div data-testid="answer-options" className="answer">
                 {shuffle.map((question, i) => (

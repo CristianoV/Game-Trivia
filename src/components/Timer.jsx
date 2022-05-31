@@ -1,5 +1,6 @@
 import React from 'react';
 import './Timer.css';
+import propTypes from 'prop-types';
 
 export default class Timer extends React.Component {
   constructor(props) {
@@ -7,20 +8,21 @@ export default class Timer extends React.Component {
     this.state = {
       TIME_LIMIT: 20,
       timeLeft: 30,
-      // timer: 30,
     };
   }
 
-  // componentDidMount() {
-  //   this.startTimer();
-  // }
-
   componentDidUpdate(prevProps) {
-    if (prevProps.time !== this.props.time) {
-      this.setState({
-        timeLeft: this.props.time,
-      }, () => this.setCircleDasharray());
+    const { time } = this.props;
+    if (prevProps.time !== time) {
+      this.setTime();
     }
+  }
+
+  setTime = () => {
+    const { time } = this.props;
+    this.setState({
+      timeLeft: time,
+    }, () => this.setCircleDasharray());
   }
 
   formatTimeLeft = (time) => {
@@ -33,22 +35,6 @@ export default class Timer extends React.Component {
     }
     return `${minutes}:${seconds}`;
   }
-
-  // startTimer = () => {
-  //   const TIMER = 1000;
-  //   const interval = setInterval(() => {
-  //     this.setState((prevState) => ({
-  //       timeLeft: prevState.timeLeft < 0 ? 0 : prevState.timeLeft - 1,
-  //     }));
-  //     this.setCircleDasharray();
-  //     console.log('teste');
-  //     const { timeLeft } = this.state;
-  //     console.log('teste');
-  //     if (timeLeft === 0) {
-  //       clearInterval(interval);
-  //     }
-  //   }, TIMER);
-  // }
 
   calculateTimeFraction = () => {
     const { timeLeft, TIME_LIMIT } = this.state;
@@ -109,3 +95,7 @@ export default class Timer extends React.Component {
     );
   }
 }
+
+Timer.propTypes = {
+  time: propTypes.number.isRequired,
+};
