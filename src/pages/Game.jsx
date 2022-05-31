@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import { actionSumAcertion, actionSumScore } from '../redux/action';
 import '../styles/Game.css';
 import image from '../trivia.png';
+import Timer from '../components/Timer';
 
 class Game extends React.Component {
   state = {
@@ -168,7 +169,8 @@ class Game extends React.Component {
             <img src={ image } alt="logo-game" />
           </div>
           <div className="info-game">
-            <span data-testid="timer">{time}</span>
+            {/* <span data-testid="timer">{time}</span> */}
+            <Timer time={ time } />
             <p data-testid="header-score">{score}</p>
           </div>
           <div className="info-player">

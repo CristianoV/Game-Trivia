@@ -1,0 +1,53 @@
+.base-timer {
+  height: 300px;
+  position: relative;
+  width: 300px;
+}
+
+/* Removes SVG styling that would hide the time label */
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+
+/* The SVG path that displays the timer's progress */
+.base-timer__path-elapsed {
+  stroke: grey;
+  stroke-width: 7px;
+}
+
+.base-timer__label {
+  align-items: center;
+  display: flex;
+  font-size: 48px;
+  height: 300px;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  width: 300px;
+}
+
+.base-timer__path-remaining {
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 7px;
+  transform: rotate(90deg);
+  transform-origin: center;
+  transition: 1s linear all;
+}
+
+.base-timer__svg {
+  transform: scaleX(-1);
+}
+
+.green {
+  color: rgb(65, 184, 131);
+}
+
+.alert {
+  color: red;
+}
+
+.warning {
+  color: orange;
+}
