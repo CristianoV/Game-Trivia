@@ -73,7 +73,6 @@ class Settings extends React.Component {
               type="number"
               name="number"
               value={ number }
-              // id={ number }
               onChange={ (e) => this.hendleChange(e, 'Number') }
             />
           </label>
