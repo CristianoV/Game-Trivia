@@ -23,9 +23,7 @@ class Game extends React.Component {
   }
 
   componentDidUpdate(_null, prevState) {
-    if (prevState.time === 1) {
-      clearInterval(this.interval);
-    }
+    if (prevState.time === 1) clearInterval(this.interval);
   }
 
   componentWillUnmount() {
@@ -33,16 +31,12 @@ class Game extends React.Component {
     const picture = `https://www.gravatar.com/avatar/${hash}`;
     const localStorageAtual = JSON.parse(localStorage.getItem('ranking'));
     if (!localStorageAtual) {
-      localStorage.setItem(
-        'ranking',
-        JSON.stringify([{ name, picture, score }]),
-      );
+      localStorage.setItem('ranking',
+        JSON.stringify([{ name, picture, score }]));
     }
     if (localStorageAtual) {
-      localStorage.setItem(
-        'ranking',
-        JSON.stringify([...localStorageAtual, { name, picture, score }]),
-      );
+      localStorage.setItem('ranking',
+        JSON.stringify([...localStorageAtual, { name, picture, score }]));
     }
   }
 
@@ -53,10 +47,15 @@ class Game extends React.Component {
   };
 
   getQuestions = async () => {
+    const { name, history } = this.props;
+    if (!name) {
+      history.push('/');
+    }
     const denied = 3;
     const token = localStorage.getItem('token');
+    const settings = JSON.parse(localStorage.getItem('settings'));
     const request = await fetch(
-      `https://opentdb.com/api.php?amount=5&token=${token}`,
+      `https://opentdb.com/api.php?amount=${settings.Number}&category=${settings.Category}&difficulty=${settings.Difficulty}&type=${settings.Type}&token=${token}`,
     );
     const json = await request.json();
     if (json.response_code === denied) return this.tokenDenied();
