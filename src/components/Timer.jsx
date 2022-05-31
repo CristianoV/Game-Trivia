@@ -7,12 +7,20 @@ export default class Timer extends React.Component {
     this.state = {
       TIME_LIMIT: 20,
       timeLeft: 30,
-      timer: this.props.timer,
+      // timer: 30,
     };
   }
 
-  componentDidMount() {
-    this.startTimer();
+  // componentDidMount() {
+  //   this.startTimer();
+  // }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.time !== this.props.time) {
+      this.setState({
+        timeLeft: this.props.time,
+      }, () => this.setCircleDasharray());
+    }
   }
 
   formatTimeLeft = (time) => {
@@ -26,21 +34,21 @@ export default class Timer extends React.Component {
     return `${minutes}:${seconds}`;
   }
 
-  startTimer = () => {
-    const TIMER = 1000;
-    const interval = setInterval(() => {
-      this.setState((prevState) => ({
-        timeLeft: prevState.timeLeft < 0 ? 0 : prevState.timeLeft - 1,
-      }));
-      this.setCircleDasharray();
-      console.log('teste');
-      const { timeLeft } = this.state;
-      console.log('teste');
-      if (timeLeft === 0) {
-        clearInterval(interval);
-      }
-    }, TIMER);
-  }
+  // startTimer = () => {
+  //   const TIMER = 1000;
+  //   const interval = setInterval(() => {
+  //     this.setState((prevState) => ({
+  //       timeLeft: prevState.timeLeft < 0 ? 0 : prevState.timeLeft - 1,
+  //     }));
+  //     this.setCircleDasharray();
+  //     console.log('teste');
+  //     const { timeLeft } = this.state;
+  //     console.log('teste');
+  //     if (timeLeft === 0) {
+  //       clearInterval(interval);
+  //     }
+  //   }, TIMER);
+  // }
 
   calculateTimeFraction = () => {
     const { timeLeft, TIME_LIMIT } = this.state;
@@ -57,10 +65,6 @@ export default class Timer extends React.Component {
       .getElementById('base-timer-path-remaining')
       .setAttribute('stroke-dasharray', circleDasharray);
   };
-
-  click = () => {
-    this.setState({ timeLeft: 30 }, this.startTimer());
-  }
 
   colorTime = () => {
     const { timeLeft } = this.state;
@@ -101,7 +105,6 @@ export default class Timer extends React.Component {
             {this.formatTimeLeft(timeLeft)}
           </span>
         </div>
-        <input type="button" value="SEGUNDA VEZ" onClick={ () => this.click() } />
       </div>
     );
   }
