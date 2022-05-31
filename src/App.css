@@ -5,3 +5,11 @@
 .correct {
   border: 3px solid rgb(6, 240, 15);
 }
+
+.correct:disabled {
+  color: white;
+}
+
+.incorrect:disabled {
+  color: black;
+}

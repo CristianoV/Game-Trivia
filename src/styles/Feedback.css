@@ -1,0 +1,50 @@
+.feedback-container {
+  height: 100vh;
+  width: 100vw;
+}
+
+.header-feedback {
+  align-items: center;
+  display: flex;
+  height: 20vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.game-status {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin: 30px auto 0;
+  width: 20%;
+}
+
+.game-status p {
+  font-weight: 600;
+}
+
+.btn-container-feedback {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.btn-container-feedback input {
+  background-color: transparent;
+  border: 1px solid var(--verde);
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 10px 5px;
+  transition: all 0.4s ease-out;
+  width: 75px;
+}
+
+.btn-container-feedback input:nth-child( 1 ) {
+  margin-right: 40px;
+}
+
+.btn-container-feedback input:hover {
+  background-color: var(--verde);
+  color: var(--roxo-fundo);
+}
