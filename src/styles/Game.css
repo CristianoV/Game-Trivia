@@ -12,6 +12,7 @@ body {
   justify-content: flex-start;
   margin: 0 auto;
   overflow-y: hidden;
+  padding-top: 5%;
   width: 50vw;
 }
 
@@ -54,11 +55,19 @@ body {
 }
 
 .answer button {
+  cursor: pointer;
   padding: 10px;
 }
 
 .buttonNext {
+  background-color: transparent;
+  border: 1px solid var(--verde);
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  margin: 7px 0;
   padding: 6px;
+  transition: all 0.4s ease-out;
   width: 50%;
 }
 
@@ -66,6 +75,11 @@ body {
   align-items: center;
   display: flex;
   flex-direction: column-reverse;
+}
+
+.buttonNext:hover {
+  background-color: var(--verde);
+  color: var(--roxo-fundo);
 }
 
 .game p:nth-child( 1 ) {
