@@ -32,17 +32,17 @@ class Login extends React.Component {
     return json.token;
   };
 
-  storage = () => {
-    const settings = JSON.parse(localStorage.getItem('settings'));
-    const MINIMAL_QUESTIONS = 5;
-    console.log(settings);
-    localStorage.setItem('settings', (JSON.stringify({
-      Category: settings ? settings.Category : '',
-      Difficulty: settings ? settings.Difficulty : '',
-      Number: settings ? settings.Number : MINIMAL_QUESTIONS,
-      Type: settings ? settings.Type : '',
-    })));
-  };
+  // storage = () => {
+  //   const settings = JSON.parse(localStorage.getItem('settings'));
+  //   const MINIMAL_QUESTIONS = 5;
+  //   console.log(settings);
+  //   localStorage.setItem('settings', (JSON.stringify({
+  //     Category: settings ? settings.Category : '',
+  //     Difficulty: settings ? settings.Difficulty : '',
+  //     Number: settings ? settings.Number : MINIMAL_QUESTIONS,
+  //     Type: settings ? settings.Type : '',
+  //   })));
+  // };
 
   handleClick = async (info) => {
     const { setEmail, setHashAction } = this.props;
@@ -50,7 +50,7 @@ class Login extends React.Component {
     setHashAction(md5(info.gravatarEmail).toString());
     const token = await this.fetchToken();
     localStorage.setItem('token', token);
-    this.storage();
+    // this.storage();
     const { history } = this.props;
     history.push('/game');
   };

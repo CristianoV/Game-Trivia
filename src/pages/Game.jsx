@@ -54,9 +54,13 @@ class Game extends React.Component {
     const denied = 3;
     const token = localStorage.getItem('token');
     const settings = JSON.parse(localStorage.getItem('settings'));
-    const request = await fetch(
-      `https://opentdb.com/api.php?amount=${settings.Number}&category=${settings.Category}&difficulty=${settings.Difficulty}&type=${settings.Type}&token=${token}`,
-    );
+    const number = 5;
+    let request;
+    if (settings) {
+      (request = await fetch(`https://opentdb.com/api.php?amount=${settings.Number ? settings.Number : number}&category=${settings.Category ? settings.Category : null}&difficulty=${settings.Difficulty ? settings.Difficulty : ''}&type=${settings.Type ? settings.Type : ''}&token=${token}`));
+    } else {
+      request = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
+    }
     const json = await request.json();
     if (json.response_code === denied) return this.tokenDenied();
     this.setState({ questions: json.results }, () => this.shuffleQuestions());
@@ -67,8 +71,7 @@ class Game extends React.Component {
     for (let i = arr.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
+    } return arr;
   };
 
   shuffleQuestions = () => {
@@ -89,12 +92,9 @@ class Game extends React.Component {
     const MEDIUM = 2;
     const EASY = 1;
     switch (currentQuestion.difficulty) {
-    case 'easy':
-      return EASY;
-    case 'medium':
-      return MEDIUM;
-    default:
-      return HARD;
+    case 'easy': return EASY;
+    case 'medium': return MEDIUM;
+    default: return HARD;
     }
   };
 
