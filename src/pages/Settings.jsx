@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import propTypes from 'prop-types';
 import image from '../trivia.png';
 
 class Settings extends React.Component {
   state = {
     difficulty: ['easy', 'medium', 'hard'],
-    // number: '',
   };
 
   componentDidMount() {
@@ -20,12 +20,6 @@ class Settings extends React.Component {
     this.setState({ category: json.trivia_categories });
   };
 
-  handleClick = ({ target }, name) => {
-    const settings = JSON.parse(localStorage.getItem('settings'));
-    localStorage.setItem('settings',
-      JSON.stringify({ ...settings, [name]: target.id }));
-  }
-
   hendleChange = ({ target }, name) => {
     const settings = JSON.parse(localStorage.getItem('settings'));
     localStorage.setItem('settings',
@@ -38,34 +32,48 @@ class Settings extends React.Component {
 
   render() {
     const { category, difficulty, number } = this.state;
+    const { history } = this.props;
     return (
       <div>
         <header className="header">
           <div className="logo-trivia"><img src={ image } alt="logo-game" /></div>
         </header>
-        <p data-testid="settings-title">Settings</p>
-        <div>
-          { category && category.map((item) => (
-            <input
-              key={ item.id }
-              type="button"
-              value={ item.name }
-              id={ item.id }
-              onClick={ (e) => this.handleClick(e, 'Category') }
-            />
-          ))}
-        </div>
-        <div>
-          { difficulty && difficulty.map((item, index) => (
-            <input
-              key={ index }
-              type="button"
-              value={ item }
-              id={ item }
-              onClick={ (e) => this.handleClick(e, 'Difficulty') }
-            />
-          ))}
-        </div>
+        <h3 data-testid="settings-title">Settings</h3>
+        <label htmlFor="categoryQuestions">
+          Categoria:
+          <select
+            onClick={ (e) => this.hendleChange(e, 'Category') }
+            id="categoryQuestions"
+          >
+            { category && category.map((item) => (
+              <option
+                key={ item.id }
+                value={ item.id }
+                id={ item.id }
+              >
+                { item.name }
+              </option>
+            ))}
+          </select>
+        </label>
+        <label htmlFor="difficultyQuestions">
+          Dificuldade:
+          <select
+            onClick={ (e) => this.hendleChange(e, 'Difficulty') }
+            id="difficultyQuestions"
+          >
+            { difficulty && difficulty.map((item, index) => (
+              <option
+                key={ index }
+                type="button"
+                value={ item }
+                id={ item }
+              >
+                {item}
+              </option>
+            ))}
+          </select>
+        </label>
         <div>
           <label htmlFor="number">
             Number of questions:
@@ -93,10 +101,17 @@ class Settings extends React.Component {
         </div>
         <div>
           <input type="button" value="RESET" onClick={ () => this.resetQuestion() } />
+          <input type="button" value="START" onClick={ () => history.push('/game') } />
         </div>
       </div>
     );
   }
 }
+
+Settings.propTypes = {
+  history: propTypes.shape({
+    push: propTypes.func,
+  }).isRequired,
+};
 
 export default connect()(Settings);
