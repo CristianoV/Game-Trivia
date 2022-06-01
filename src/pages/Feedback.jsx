@@ -41,7 +41,8 @@ class Feedback extends React.Component {
         <header className="header">
           <div className="logo-trivia"><img src={ triviaImg } alt="logo-game" /></div>
           <div className="info-game">
-            <p data-testid="header-score">{`Pontos: ${scorePlayer}`}</p>
+            <p>Pontos:</p>
+            <span data-testid="header-score">{scorePlayer}</span>
           </div>
           <div className="info-player">
             <p data-testid="header-player-name">{namePlayer}</p>
@@ -54,9 +55,11 @@ class Feedback extends React.Component {
         </header>
         <section className="game-status">
           <p data-testid="feedback-text">{this.feedbackMessage()}</p>
-          <p data-testid="feedback-total-score">{`Pontos: ${Number(scorePlayer)}`}</p>
+          <span>Pontos:</span>
+          <p data-testid="feedback-total-score">{scorePlayer}</p>
+          <span>Total de acertos:</span>
           <p data-testid="feedback-total-question">
-            {`Total de acertos: ${Number(assertionsPlayer)}`}
+            {assertionsPlayer}
           </p>
         </section>
         <nav className="btn-container-feedback">
