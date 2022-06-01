@@ -32,18 +32,6 @@ class Login extends React.Component {
     return json.token;
   };
 
-  // storage = () => {
-  //   const settings = JSON.parse(localStorage.getItem('settings'));
-  //   const MINIMAL_QUESTIONS = 5;
-  //   console.log(settings);
-  //   localStorage.setItem('settings', (JSON.stringify({
-  //     Category: settings ? settings.Category : '',
-  //     Difficulty: settings ? settings.Difficulty : '',
-  //     Number: settings ? settings.Number : MINIMAL_QUESTIONS,
-  //     Type: settings ? settings.Type : '',
-  //   })));
-  // };
-
   handleClick = async (info) => {
     const { setEmail, setHashAction } = this.props;
     setEmail(info);
@@ -96,6 +84,14 @@ class Login extends React.Component {
             onClick={ () => this.handleClick({ name, gravatarEmail: email }) }
           >
             Play
+          </button>
+
+          <button
+            name="ranking"
+            type="button"
+            onClick={ () => history.push('/ranking') }
+          >
+            Ranking
           </button>
 
           <button

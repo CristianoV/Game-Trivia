@@ -20,6 +20,7 @@ class Ranking extends React.Component {
 
   render() {
     const { ranking } = this.state;
+    const RANK_LENGTH = 4;
     return (
       <>
         <header data-testid="ranking-title">
@@ -37,12 +38,16 @@ class Ranking extends React.Component {
           <div className="container-ranking">
             <ul>
               { ranking.length !== 0 && (
-                ranking.map((player, index) => (
+                ranking.map((player, index) => index <= RANK_LENGTH && (
                   <li key={ index }>
-                    <p>{ index + 1 }</p>
+                    <p>{ `0 ${index + 1}` }</p>
                     <img src={ player.picture } alt={ `Foto de ${player.name}` } />
                     <p data-testid={ `player-name-${index}` }>{player.name}</p>
-                    <p data-testid={ `player-score-${index}` }>{player.score}</p>
+                    <p>
+                      <span data-testid={ `player-score-${index}` }>{player.score}</span>
+                      { ' ' }
+                      Pts
+                    </p>
                   </li>))
               ) }
             </ul>
