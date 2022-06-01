@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../styles/Ranking.css';
+import logo from '../trivia.png';
 
 class Ranking extends React.Component {
   state = {
@@ -21,9 +23,8 @@ class Ranking extends React.Component {
     return (
       <>
         <header data-testid="ranking-title">
-          Tela de Ranking
-        </header>
-        <main>
+          <img src={ logo } alt="logo-trivia" />
+          <h1>Ranking</h1>
           <button
             type="button"
             data-testid="btn-go-home"
@@ -31,15 +32,19 @@ class Ranking extends React.Component {
           >
             Login
           </button>
-          <div>
+        </header>
+        <main>
+          <div className="container-ranking">
             <ul>
-              { ranking.length !== 0 ? (
+              { ranking.length !== 0 && (
                 ranking.map((player, index) => (
                   <li key={ index }>
-                    <div data-testid={ `player-name-${index}` }>{player.name}</div>
-                    <div data-testid={ `player-score-${index}` }>{player.score}</div>
+                    <p>{ index + 1 }</p>
+                    <img src={ player.picture } alt={ `Foto de ${player.name}` } />
+                    <p data-testid={ `player-name-${index}` }>{player.name}</p>
+                    <p data-testid={ `player-score-${index}` }>{player.score}</p>
                   </li>))
-              ) : null }
+              ) }
             </ul>
           </div>
         </main>
