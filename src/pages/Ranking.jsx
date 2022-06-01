@@ -10,7 +10,9 @@ class Ranking extends React.Component {
 
   componentDidMount() {
     const RankingToLocalStorage = JSON.parse(localStorage.getItem('ranking'));
-    this.setState({ ranking: RankingToLocalStorage.sort((a, b) => b.score - a.score) });
+    if (RankingToLocalStorage) {
+      this.setState({ ranking: RankingToLocalStorage.sort((a, b) => b.score - a.score) });
+    }
   }
 
   backToLogin = () => {
@@ -37,7 +39,7 @@ class Ranking extends React.Component {
         <main>
           <div className="container-ranking">
             <ul>
-              { ranking.length !== 0 && (
+              { ranking.length !== 0 ? (
                 ranking.map((player, index) => index <= RANK_LENGTH && (
                   <li key={ index }>
                     <p>{ `0 ${index + 1}` }</p>
@@ -49,7 +51,7 @@ class Ranking extends React.Component {
                       Pts
                     </p>
                   </li>))
-              ) }
+              ) : <h3>Você ainda não jogou</h3> }
             </ul>
           </div>
         </main>
