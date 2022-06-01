@@ -69,7 +69,7 @@ class Settings extends React.Component {
                 value={ item }
                 id={ item }
               >
-                {item}
+                {item.toUpperCase()}
               </option>
             ))}
           </select>
