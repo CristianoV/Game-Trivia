@@ -1,0 +1,64 @@
+.title {
+  font-size: 50px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.form-settings {
+  background-color: darkslategray;
+  border: solid var(--verde) 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 60vh;
+  justify-content: space-around;
+  margin: auto;
+  width: 50%;
+}
+
+.form-settings label {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+}
+
+.form-settings span {
+  font-size: large;
+  font-weight: 500;
+}
+
+.form-settings select {
+  cursor: pointer;
+  padding: 5px;
+  width: 80%;
+}
+
+.form-settings [ type = 'number' ] {
+  padding: 5px;
+  text-align: center;
+  width: 10%;
+}
+
+.buttons-settings {
+  align-items: center;
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  width: 100%;
+}
+
+.buttons-settings input {
+  background-color: transparent;
+  border: 1px solid var(--verde);
+  color: white;
+  cursor: pointer;
+  font-weight: 500;
+  margin: 7px 0;
+  padding: 10px 60px;
+  transition: all 0.4s ease-out;
+}
+
+.buttons-settings input:hover {
+  background-color: var(--verde);
+  color: var(--roxo-fundo);
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 import image from '../trivia.png';
+import '../styles/Settings.css';
 
 class Settings extends React.Component {
   state = {
@@ -34,62 +35,51 @@ class Settings extends React.Component {
     const { category, difficulty, number } = this.state;
     const { history } = this.props;
     return (
-      <div>
+      <>
         <header className="header">
           <div className="logo-trivia"><img src={ image } alt="logo-game" /></div>
         </header>
-        <h3 data-testid="settings-title">Settings</h3>
-        <label htmlFor="categoryQuestions">
-          Categoria:
-          <select
-            onClick={ (e) => this.hendleChange(e, 'Category') }
-            id="categoryQuestions"
-          >
-            { category && category.map((item) => (
-              <option
-                key={ item.id }
-                value={ item.id }
-                id={ item.id }
-              >
-                { item.name }
-              </option>
-            ))}
-          </select>
-        </label>
-        <label htmlFor="difficultyQuestions">
-          Dificuldade:
-          <select
-            onClick={ (e) => this.hendleChange(e, 'Difficulty') }
-            id="difficultyQuestions"
-          >
-            { difficulty && difficulty.map((item, index) => (
-              <option
-                key={ index }
-                type="button"
-                value={ item }
-                id={ item }
-              >
-                {item.toUpperCase()}
-              </option>
-            ))}
-          </select>
-        </label>
-        <div>
-          <label htmlFor="number">
-            Number of questions:
-            <input
-              type="number"
-              name="number"
-              value={ number }
-              onChange={ (e) => this.hendleChange(e, 'Number') }
-            />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="category">
-            Type:
+        <h1 className="title" data-testid="settings-title">Settings</h1>
+        <form className="form-settings">
+          <label htmlFor="categoryQuestions">
+            <span>Category</span>
             <select
-              name="category"
+              onClick={ (e) => this.hendleChange(e, 'Category') }
+              id="categoryQuestions"
+            >
+              { category && category.map((item) => (
+                <option
+                  key={ item.id }
+                  value={ item.id }
+                  id={ item.id }
+                >
+                  { item.name }
+                </option>
+              ))}
+            </select>
+          </label>
+          <label htmlFor="difficultyQuestions">
+            <span>Level</span>
+            <select
+              onClick={ (e) => this.hendleChange(e, 'Difficulty') }
+              id="difficultyQuestions"
+            >
+              { difficulty && difficulty.map((item, index) => (
+                <option
+                  key={ index }
+                  type="button"
+                  value={ item }
+                  id={ item }
+                >
+                  {item.toUpperCase()}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label htmlFor="Type">
+            <span>Type</span>
+            <select
+              name="Type"
               id=""
               onChange={ (e) => this.hendleChange(e, 'Type') }
             >
@@ -98,12 +88,22 @@ class Settings extends React.Component {
               <option value="multiple">Múltipla Escolha</option>
             </select>
           </label>
-        </div>
-        <div>
-          <input type="button" value="RESET" onClick={ () => this.resetQuestion() } />
-          <input type="button" value="START" onClick={ () => history.push('/game') } />
-        </div>
-      </div>
+          <label htmlFor="number">
+            <span>Number of questions</span>
+            <input
+              type="number"
+              name="number"
+              value={ number }
+              onChange={ (e) => this.hendleChange(e, 'Number') }
+              min="1"
+            />
+          </label>
+          <div className="buttons-settings">
+            <input type="button" value="RESET" onClick={ () => this.resetQuestion() } />
+            <input type="button" value="START" onClick={ () => history.push('/game') } />
+          </div>
+        </form>
+      </>
     );
   }
 }

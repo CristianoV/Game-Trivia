@@ -7,7 +7,7 @@ body {
   overflow: hidden;
 }
 
-header {
+.ranking-title {
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -15,11 +15,11 @@ header {
   padding-top: 10px;
 }
 
-header img {
+.ranking-title img {
   width: 150px;
 }
 
-header button {
+.ranking-title button {
   background-color: transparent;
   border: 1px solid var(--verde);
   color: white;
@@ -31,7 +31,7 @@ header button {
   width: 10%;
 }
 
-header button:hover {
+.ranking-titleer button:hover {
   background-color: var(--verde);
   color: var(--roxo-fundo);
 }

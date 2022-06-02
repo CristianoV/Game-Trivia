@@ -57,7 +57,7 @@ class Game extends React.Component {
     const number = 5;
     let request;
     if (settings) {
-      (request = await fetch(`https://opentdb.com/api.php?amount=${settings.Number ? settings.Number : number}&category=${settings.Category ? settings.Category : null}&difficulty=${settings.Difficulty ? settings.Difficulty : ''}&type=${settings.Type ? settings.Type : ''}&token=${token}`));
+      (request = await fetch(`https://opentdb.com/api.php?amount=${settings.Number ? settings.Number : number}&category=${settings.Category ? settings.Category : ''}&difficulty=${settings.Difficulty ? settings.Difficulty : ''}&type=${settings.Type ? settings.Type : ''}&token=${token}`));
     } else {
       request = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
     }

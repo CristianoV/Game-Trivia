@@ -25,7 +25,7 @@ class Ranking extends React.Component {
     const RANK_LENGTH = 4;
     return (
       <>
-        <header data-testid="ranking-title">
+        <header className="ranking-title" data-testid="ranking-title">
           <img src={ logo } alt="logo-trivia" />
           <h1>Ranking</h1>
           <button
