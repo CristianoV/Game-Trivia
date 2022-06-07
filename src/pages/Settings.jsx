@@ -47,6 +47,9 @@ class Settings extends React.Component {
               onClick={ (e) => this.hendleChange(e, 'Category') }
               id="categoryQuestions"
             >
+              <option value="">
+                Select a category
+              </option>
               { category && category.map((item) => (
                 <option
                   key={ item.id }
@@ -64,6 +67,9 @@ class Settings extends React.Component {
               onClick={ (e) => this.hendleChange(e, 'Difficulty') }
               id="difficultyQuestions"
             >
+              <option value="">
+                Select a level
+              </option>
               { difficulty && difficulty.map((item, index) => (
                 <option
                   key={ index }

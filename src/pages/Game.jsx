@@ -29,6 +29,7 @@ class Game extends React.Component {
   componentWillUnmount() {
     const { name, hash, score } = this.props;
     const picture = `https://www.gravatar.com/avatar/${hash}`;
+    console.log(picture);
     const localStorageAtual = JSON.parse(localStorage.getItem('ranking'));
     if (!localStorageAtual) {
       localStorage.setItem('ranking',

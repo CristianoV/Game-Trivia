@@ -5,8 +5,11 @@
 }
 
 .form-settings {
-  background-color: darkslategray;
-  border: solid var(--verde) 3px;
+  background-color: lightgray;
+  border: solid darkblue 1px;
+  border-radius: 50px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  color: black;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -24,19 +27,22 @@
 
 .form-settings span {
   font-size: large;
-  font-weight: 500;
+  font-weight: 700;
+  margin: auto;
 }
 
 .form-settings select {
   cursor: pointer;
+  margin: auto;
   padding: 5px;
   width: 80%;
 }
 
 .form-settings [ type = 'number' ] {
+  margin: auto;
   padding: 5px;
   text-align: center;
-  width: 10%;
+  width: 20%;
 }
 
 .buttons-settings {
@@ -49,12 +55,12 @@
 
 .buttons-settings input {
   background-color: transparent;
-  border: 1px solid var(--verde);
-  color: white;
+  border: 1px solid darkblue;
+  color: black;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600;
   margin: 7px 0;
-  padding: 10px 60px;
+  padding: 1% 6%;
   transition: all 0.4s ease-out;
 }
 
