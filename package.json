@@ -6,6 +6,7 @@
     "node": "16"
   },
   "dependencies": {
+    "@testing-library/dom": "^8.18.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/user-event": "^7.1.2",
     "crypto-js": "^4.0.0",
@@ -50,6 +51,7 @@
   "devDependencies": {
     "@sheerun/mutationobserver-shim": "0.3.3",
     "@testing-library/react": "^10.4.9",
+    "coverage": "^0.4.1",
     "cypress": "^3.7.0",
     "cypress-multi-reporters": "^1.4.0",
     "eslint": "6.8.0",
