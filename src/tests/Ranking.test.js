@@ -48,19 +48,21 @@ describe('Testes da pagina de Ranking', () => {
     };
 
     const ranking = [
-      { name: 'PLAYER_1', score: 10, picture: '' },
-      { name: 'PLAYER_2', score: 100, picture: '' },
-      { name: 'PLAYER_3', score: 40, picture: '' }
+      { name: 'PLAYER_1', score: 10, picture: 'https://www.gravatar.com/avatar/' },
+      { name: 'PLAYER_2', score: 100, picture: 'https://www.gravatar.com/avatar/' },
+      { name: 'PLAYER_3', score: 40, picture: 'https://www.gravatar.com/avatar/' }
     ];
     localStorage.setItem('ranking', JSON.stringify(ranking));
 
     renderWithRouterAndRedux(<App />, initialState, "/ranking");
 
     const listRanking = screen.getByRole('list');
-    const position1 = listRanking.firstElementChild.firstChild.innerHTML;
-    expect(position1).toBe('PLAYER_2');
-    const position3 = listRanking.lastElementChild.firstChild.innerHTML;
-    expect(position3).toBe('PLAYER_1');
+    const position1 = screen.getByTestId('player-name-0');
+    expect(position1.innerHTML).toBe('PLAYER_2');
+    const position2 = screen.getByTestId('player-name-1');
+    expect(position2.innerHTML).toBe('PLAYER_3');
+    const position3 = screen.getByTestId('player-name-2');
+    expect(position3.innerHTML).toBe('PLAYER_1');
   });
 
   test('03 - Testa se ao clicar em Login redireciona para a pagina inicial', () => {

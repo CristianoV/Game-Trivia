@@ -6,7 +6,7 @@ import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import {
   questionsResponse,
   invalidTokenQuestionsResponse,
-} from '../../cypress/mocks/questions';
+} from './helpers/questions';
 
 describe('Testes da pagina de Jogo', () => {
   test('01 - Testa se os elementos estão na tela', () => {
@@ -30,7 +30,6 @@ describe('Testes da pagina de Jogo', () => {
     expect(namePlayer).toBeInTheDocument();
 
     const Timer = screen.getByRole('banner');
-    within(Timer).getByText(/0/i);
     expect(Timer).toBeInTheDocument();
   });
 
@@ -177,7 +176,7 @@ describe('Testes da pagina de Jogo', () => {
       expect(wrongAnswer[0]).toBeInTheDocument();
       userEvent.click(wrongAnswer[0])
       const Timer = screen.getByRole('banner');
-      within(Timer).getByText(/0/i);
+      within(Timer).getByText(/pontos: 0/i);
       const buttonNext = screen.getByTestId("btn-next");
       expect(buttonNext).toBeInTheDocument();
       userEvent.click(buttonNext);

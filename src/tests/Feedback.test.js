@@ -21,8 +21,8 @@ describe('Testes da pagina de Feedback', () => {
     const namePlayer = screen.getByText(/Player Name/i);
     expect(namePlayer).toBeInTheDocument();
     const srcImage = screen.getByRole('img', {
-      name: /avatar do player/i,
-    });
+      name: /profileimage/i
+    })
     expect(srcImage).toBeInTheDocument();
     expect(srcImage.src).toBe(
       `https://www.gravatar.com/avatar/${initialState.player.hash}`
