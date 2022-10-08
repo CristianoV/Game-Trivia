@@ -1,4 +1,7 @@
-# Projeto Jogo de Trivia!
+<h1 align="center">
+Projeto Jogo de Trivia!
+</h1>
+
 ![Game Gif](./Trivia.gif)
 
 <!-- 
