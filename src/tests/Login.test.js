@@ -40,9 +40,10 @@ describe('Testes do componente Login', () => {
     expect(btnPlay).toBeInTheDocument();
     userEvent.type(name, 'Jeazi');
     userEvent.type(email, 'jeazi_ricardo@hotmail.com');
-    userEvent.click(btnPlay);
-    await waitFor(() => 
-      expect(history.location.pathname).toBe('/game')
+    await waitFor(() => {
+      userEvent.click(btnPlay);
+      const { pathname } = history.location;
+      expect(pathname).toBe('/game')}
     );
   });
 
