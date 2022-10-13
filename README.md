@@ -4,10 +4,6 @@ Projeto Jogo de Trivia!
 
 ![Game Gif](./Trivia.gif)
 
-<!-- 
-## :books: Contexto
-Esse Projeto se baseia num jogo de RPG de mesa (Dungeons and Dragons) e teve como objetivo, consolidar os conhecimentos sobre POO, Typescript e SOLID aprendidos ao final do modulo de POO na [Trybe](https://app.betrybe.com/).  -->
-
 ## :books: Contexto
 Esse Projeto foi feito em grupo e simula um jogo de Trivia onde os jogadores podem se aventurar dando o seu melhor respondendo as perguntas e tentando ficar no topo do ranking. O projeto tentou simular um ambiente de desenvolvimento aonde cada um do grupo tinha a sua responsabilidade, utilizando o metodo Kanban conseguimos evoluir de uma forma super rapida.
 
